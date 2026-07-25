@@ -1,0 +1,34 @@
+2026-01-11 12:28:31.712 [main] ERROR ErrorLoggingExample - File not found: nonexistent.txt
+java.io.FileNotFoundException: nonexistent.txt (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:139)
+	at scala.io.Source$.fromFile(Source.scala:94)
+	at scala.io.Source$.fromFile(Source.scala:79)
+	at scala.io.Source$.fromFile(Source.scala:57)
+	at ErrorLoggingExample.basicErrorLogging(ErrorLoggingExample.scala:16)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:156)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.712 [main] ERROR ErrorLoggingExample - Error processing action 'updateProfile' for user 'user123': Invalid state
+java.lang.IllegalStateException: Invalid state
+	at ErrorLoggingExample.logErrorWithContext(ErrorLoggingExample.scala:33)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:159)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.713 [main] ERROR ErrorLoggingExample - This is an ERROR message - error occurred
+2026-01-11 12:28:31.726 [main] ERROR ErrorLoggingExample - Failed to parse value 'abc' as integer
+java.lang.NumberFormatException: For input string: "abc"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:565)
+	at java.base/java.lang.Integer.parseInt(Integer.java:662)
+	at scala.collection.StringOps$.toInt$extension(StringOps.scala:910)
+	at ErrorLoggingExample.functionalErrorHandling$$anonfun$1(ErrorLoggingExample.scala:55)
+	at scala.util.Try$.apply(Try.scala:217)
+	at ErrorLoggingExample.functionalErrorHandling(ErrorLoggingExample.scala:55)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:166)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.727 [main] ERROR ErrorLoggingExample - Invalid input provided: Input cannot be empty
+java.lang.IllegalArgumentException: Input cannot be empty
+	at ErrorLoggingExample.errorWithRecovery(ErrorLoggingExample.scala:89)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:172)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.728 [main] ERROR ErrorLoggingExample - Operation failed for id: -1
