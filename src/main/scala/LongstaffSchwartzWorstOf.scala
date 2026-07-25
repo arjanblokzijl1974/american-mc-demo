@@ -409,6 +409,21 @@ class DownAndInWorstOfPut(
 }
 
 /**
+ * A calibrated exercise strategy: the least-squares continuation-value coefficients
+ * for each call date, as produced by [[LongstaffSchwartzPricer.calibrate]].
+ *
+ * Holding this fixed while re-simulating bumped paths is what lets the finite-difference
+ * greeks engine test the "frozen strategy vs. recalibrate-per-bump" question: the
+ * regression coefficients ARE the exercise boundary, so freezing them removes the
+ * regression noise that otherwise differs between the up- and down-bump scenarios.
+ *
+ * @param coefficients Map from call-date time index to its regression coefficient vector.
+ *                     A call date is absent if there were too few in-the-money paths to
+ *                     regress on during calibration (no early-exercise decision is made there).
+ */
+case class ExerciseStrategy(coefficients: Map[Int, Array[Double]])
+
+/**
  * Longstaff-Schwartz algorithm implementation for pricing American options.
  */
 class LongstaffSchwartzPricer(
@@ -420,13 +435,34 @@ class LongstaffSchwartzPricer(
   /**
    * Price the option using simulated paths.
    *
+   * This is the standard in-sample estimate: the exercise strategy is calibrated on
+   * `paths` and immediately applied to the same `paths`. Equivalent to
+   * `priceWithStrategy(paths, calibrate(paths))`.
+   *
    * @param paths Simulated price paths
    * @return Estimated option value
    */
   def price(paths: Array[PricePath]): Double = {
-    val numPaths = paths.length
-    logger.info(s"Pricing with ${numPaths} paths using Longstaff-Schwartz")
+    logger.info(s"Pricing with ${paths.length} paths using Longstaff-Schwartz")
     logger.info(s"Call dates: ${option.callDates.mkString(", ")}, Maturity: ${option.maturity}")
+    val strategy = calibrate(paths)
+    priceWithStrategy(paths, strategy)
+  }
+
+  /**
+   * Calibrate the exercise strategy by backward induction over the call dates.
+   *
+   * This performs the full Longstaff-Schwartz regression pass, recording the
+   * continuation-value coefficients for every call date that has enough in-the-money
+   * paths. The rolled-forward cash flows are used only to build the regression targets;
+   * the returned [[ExerciseStrategy]] is what callers reuse (or deliberately do NOT reuse)
+   * across finite-difference bumps.
+   *
+   * @param paths Simulated price paths to calibrate on
+   * @return The calibrated exercise strategy (regression coefficients per call date)
+   */
+  def calibrate(paths: Array[PricePath]): ExerciseStrategy = {
+    val numPaths = paths.length
 
     // Initialize cash flows with terminal payoff
     val cashFlows = Array.fill(numPaths)(0.0)
@@ -438,6 +474,8 @@ class LongstaffSchwartzPricer(
     }
 
     logger.debug(s"Average terminal payoff: ${cashFlows.sum / numPaths}")
+
+    val coefficientsByDate = scala.collection.mutable.Map[Int, Array[Double]]()
 
     // Backward induction through call dates
     for (callDate <- option.callDates.reverse if callDate < option.maturity) {
@@ -462,13 +500,13 @@ class LongstaffSchwartzPricer(
 
       if (itmPaths.size >= basisFunctions.dimension + 1) {
         // Perform regression to estimate continuation value
-        
-        val bla = buildRegressionData(paths, itmPaths.toArray, callDate)
-        val coefficients = leastSquaresRegression(bla._1, bla._2)
+        val (x, y) = buildRegressionData(paths, itmPaths.toArray, callDate)
+        val coefficients = leastSquaresRegression(x, y)
+        coefficientsByDate(callDate) = coefficients
 
         logger.debug(s"Regression coefficients: ${coefficients.take(5).mkString(", ")}...")
 
-        // Decide exercise vs continue for each ITM path
+        // Decide exercise vs continue for each ITM path (updates the roll-forward cash flows)
         var earlyExerciseCount = 0
         for ((pathIdx, intrinsic, _) <- itmPaths) {
           val barrierBreached = paths(pathIdx).barrierBreached(option.barrier, callDate)
@@ -487,6 +525,54 @@ class LongstaffSchwartzPricer(
       }
     }
 
+    ExerciseStrategy(coefficientsByDate.toMap)
+  }
+
+  /**
+   * Price the option on `paths` using an already-calibrated exercise strategy.
+   *
+   * No regression is performed here: the stored coefficients define the exercise boundary
+   * and are simply applied to decide exercise vs. continue on each path. This is the method
+   * the finite-difference engine calls for every bumped scenario when the strategy is frozen.
+   *
+   * @param paths    Simulated price paths to value
+   * @param strategy A strategy previously produced by [[calibrate]]
+   * @return Estimated option value
+   */
+  def priceWithStrategy(paths: Array[PricePath], strategy: ExerciseStrategy): Double = {
+    val numPaths = paths.length
+
+    val cashFlows = Array.fill(numPaths)(0.0)
+    val exerciseTimes = Array.fill(numPaths)(option.maturity)
+
+    for (i <- 0 until numPaths) {
+      cashFlows(i) = payoffCalculator.payoff(paths(i), option.maturity)
+    }
+
+    // Backward induction, applying the frozen coefficients (no regression)
+    for (callDate <- option.callDates.reverse if callDate < option.maturity) {
+      strategy.coefficients.get(callDate) match {
+        case Some(coefficients) =>
+          for (i <- 0 until numPaths) {
+            val prices = paths(i).pricesAt(callDate)
+            val intrinsic = payoffCalculator.intrinsicValue(prices)
+
+            if (intrinsic > 0) {
+              val barrierBreached = paths(i).barrierBreached(option.barrier, callDate)
+              val basis = basisFunctions(prices, barrierBreached)
+              val continuationValue = (basis zip coefficients).map { case (b, c) => b * c }.sum
+
+              if (intrinsic > continuationValue) {
+                cashFlows(i) = intrinsic
+                exerciseTimes(i) = callDate
+              }
+            }
+          }
+        case None =>
+          // Too few ITM paths at calibration time: no early-exercise decision at this date.
+      }
+    }
+
     // Discount all cash flows to present value
     val presentValues = (0 until numPaths).map { i =>
       cashFlows(i) * option.discountFactors(exerciseTimes(i))
@@ -495,7 +581,7 @@ class LongstaffSchwartzPricer(
     val optionValue = presentValues.sum / numPaths
     val stdError = math.sqrt(presentValues.map(pv => math.pow(pv - optionValue, 2)).sum / numPaths) / math.sqrt(numPaths)
 
-    logger.info(f"\nOption value: $optionValue%.4f ± $stdError%.4f")
+    logger.debug(f"Option value: $optionValue%.4f ± $stdError%.4f")
 
     optionValue
   }
