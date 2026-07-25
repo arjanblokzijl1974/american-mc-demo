@@ -1,0 +1,639 @@
+2026-01-11 12:28:31.709 [main] INFO  ErrorLoggingExample$ - Starting ErrorLoggingExample application
+2026-01-11 12:28:31.711 [main] INFO  ErrorLoggingExample$ - === Example 1: Basic Error Logging ===
+2026-01-11 12:28:31.712 [main] ERROR ErrorLoggingExample - File not found: nonexistent.txt
+java.io.FileNotFoundException: nonexistent.txt (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:185)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:139)
+	at scala.io.Source$.fromFile(Source.scala:94)
+	at scala.io.Source$.fromFile(Source.scala:79)
+	at scala.io.Source$.fromFile(Source.scala:57)
+	at ErrorLoggingExample.basicErrorLogging(ErrorLoggingExample.scala:16)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:156)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.712 [main] INFO  ErrorLoggingExample$ - 
+=== Example 2: Error with Context ===
+2026-01-11 12:28:31.712 [main] ERROR ErrorLoggingExample - Error processing action 'updateProfile' for user 'user123': Invalid state
+java.lang.IllegalStateException: Invalid state
+	at ErrorLoggingExample.logErrorWithContext(ErrorLoggingExample.scala:33)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:159)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.713 [main] INFO  ErrorLoggingExample$ - 
+=== Example 3: Different Log Levels ===
+2026-01-11 12:28:31.713 [main] INFO  ErrorLoggingExample - This is an INFO message - general information
+2026-01-11 12:28:31.713 [main] WARN  ErrorLoggingExample - This is a WARN message - warning about potential issues
+2026-01-11 12:28:31.713 [main] ERROR ErrorLoggingExample - This is an ERROR message - error occurred
+2026-01-11 12:28:31.713 [main] INFO  ErrorLoggingExample$ - 
+=== Example 4: Functional Error Handling ===
+2026-01-11 12:28:31.726 [main] INFO  ErrorLoggingExample - Successfully parsed value: 123
+2026-01-11 12:28:31.726 [main] ERROR ErrorLoggingExample - Failed to parse value 'abc' as integer
+java.lang.NumberFormatException: For input string: "abc"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:565)
+	at java.base/java.lang.Integer.parseInt(Integer.java:662)
+	at scala.collection.StringOps$.toInt$extension(StringOps.scala:910)
+	at ErrorLoggingExample.functionalErrorHandling$$anonfun$1(ErrorLoggingExample.scala:55)
+	at scala.util.Try$.apply(Try.scala:217)
+	at ErrorLoggingExample.functionalErrorHandling(ErrorLoggingExample.scala:55)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:166)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.726 [main] INFO  ErrorLoggingExample$ - 
+=== Example 5: Conditional Logging ===
+2026-01-11 12:28:31.727 [main] WARN  ErrorLoggingExample - Found empty item in data list
+2026-01-11 12:28:31.727 [main] INFO  ErrorLoggingExample$ - 
+=== Example 6: Error with Recovery ===
+2026-01-11 12:28:31.727 [main] ERROR ErrorLoggingExample - Invalid input provided: Input cannot be empty
+java.lang.IllegalArgumentException: Input cannot be empty
+	at ErrorLoggingExample.errorWithRecovery(ErrorLoggingExample.scala:89)
+	at ErrorLoggingExample$.<clinit>(ErrorLoggingExample.scala:172)
+	at ErrorLoggingExample.main(ErrorLoggingExample.scala)
+2026-01-11 12:28:31.727 [main] INFO  ErrorLoggingExample$ - Recovered value: DEFAULT_VALUE
+2026-01-11 12:28:31.728 [main] INFO  ErrorLoggingExample$ - 
+=== Example 7: Complex Operation ===
+2026-01-11 12:28:31.728 [main] INFO  ErrorLoggingExample - Successfully completed operation for id: 42
+2026-01-11 12:28:31.728 [main] WARN  ErrorLoggingExample - Invalid id provided: -1
+2026-01-11 12:28:31.728 [main] ERROR ErrorLoggingExample - Operation failed for id: -1
+2026-01-11 12:28:31.728 [main] INFO  ErrorLoggingExample$ - ErrorLoggingExample application finished
+2026-01-11 12:31:09.113 [main] INFO  InfinitelyManyPrimes$ - 
+
+Demonstrating that there are INFINITELY MANY PRIMES
+
+2026-01-11 12:31:09.125 [main] INFO  InfinitelyManyPrimes$ - 
+======================================================================
+2026-01-11 12:31:09.125 [main] INFO  InfinitelyManyPrimes$ - VISUAL DEMONSTRATION
+2026-01-11 12:31:09.125 [main] INFO  InfinitelyManyPrimes$ - ======================================================================
+2026-01-11 12:31:09.125 [main] INFO  InfinitelyManyPrimes$ - 
+2026-01-11 12:31:09.143 [main] INFO  InfinitelyManyPrimes$ - 2 + 1 = 3      → PRIME!
+2026-01-11 12:31:09.143 [main] INFO  InfinitelyManyPrimes$ - 2 × 3 + 1 = 7      → PRIME!
+2026-01-11 12:31:09.144 [main] INFO  InfinitelyManyPrimes$ - 2 × 3 × 5 + 1 = 31     → PRIME!
+2026-01-11 12:31:09.144 [main] INFO  InfinitelyManyPrimes$ - 2 × 3 × 5 × 7 + 1 = 211    → PRIME!
+2026-01-11 12:31:09.144 [main] INFO  InfinitelyManyPrimes$ - 2 × 3 × 5 × 7 × 11 + 1 = 2311   → PRIME!
+2026-01-11 12:31:09.145 [main] INFO  InfinitelyManyPrimes$ - 2 × 3 × 5 × 7 × 11 × 13 + 1 = 30031  → has prime factor 59
+2026-01-11 12:31:09.145 [main] INFO  InfinitelyManyPrimes$ - ======================================================================
+2026-01-11 12:31:09.145 [main] INFO  InfinitelyManyPrimes$ - DEMONSTRATING EUCLID'S PROOF OF INFINITELY MANY PRIMES
+2026-01-11 12:31:09.145 [main] INFO  InfinitelyManyPrimes$ - ======================================================================
+2026-01-11 12:31:09.145 [main] INFO  InfinitelyManyPrimes$ - 
+2026-01-11 12:31:09.146 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 1 ---
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - Starting with prime: 2
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 1
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 2 ---
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 2
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 3
+2026-01-11 12:31:09.147 [main] INFO  InfinitelyManyPrimes$ - 3 is prime itself!
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 3 (as prime itself)
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 2
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 3 ---
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 6
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 7
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - 7 is prime itself!
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 7 (as prime itself)
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 7
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 3
+2026-01-11 12:31:09.148 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 4 ---
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 7
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 42
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 43
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - 43 is prime itself!
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 43 (as prime itself)
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 7, 43
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 4
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 5 ---
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 7, 43
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 1806
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 1807
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - 1807 is not prime, but has prime factor: 13
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - ✓ Found new prime 13 not in original list!
+2026-01-11 12:31:09.149 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 13 (as prime factor)
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 7, 13, 43
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 5
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 6 ---
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 7, 13, 43
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 23478
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 23479
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - 23479 is not prime, but has prime factor: 53
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - ✓ Found new prime 53 not in original list!
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 53 (as prime factor)
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 7, 13, 43, 53
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 6
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 7 ---
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 7, 13, 43, 53
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 1244334
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 1244335
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - 1244335 is not prime, but has prime factor: 5
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - ✓ Found new prime 5 not in original list!
+2026-01-11 12:31:09.151 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 5 (as prime factor)
+2026-01-11 12:31:09.152 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 5, 7, 13, 43, 53
+2026-01-11 12:31:09.152 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 7
+2026-01-11 12:31:09.152 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 8 ---
+2026-01-11 12:31:09.152 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 5, 7, 13, 43, 53
+2026-01-11 12:31:09.152 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 6221670
+2026-01-11 12:31:09.152 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 6221671
+2026-01-11 12:31:09.153 [main] INFO  InfinitelyManyPrimes$ - 6221671 is prime itself!
+2026-01-11 12:31:09.153 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 6221671 (as prime itself)
+2026-01-11 12:31:09.154 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 5, 7, 13, 43, 53, 6221671
+2026-01-11 12:31:09.154 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 8
+2026-01-11 12:31:09.154 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 9 ---
+2026-01-11 12:31:09.154 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 5, 7, 13, 43, 53, 6221671
+2026-01-11 12:31:09.154 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 38709183810570
+2026-01-11 12:31:09.154 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 38709183810571
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - 38709183810571 is prime itself!
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - → New prime discovered: 38709183810571 (as prime itself)
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 5, 7, 13, 43, 53, 6221671, 38709183810571
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 9
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - 
+--- Iteration 10 ---
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Given primes: 2, 3, 5, 7, 13, 43, 53, 6221671, 38709183810571
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Product of all primes: 3011074750416518254
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Euclid number (product + 1): 3011074750416518255
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - 3011074750416518255 is not prime, but has prime factor: 5
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Current set of primes: 2, 3, 5, 7, 13, 43, 53, 6221671, 38709183810571
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Total primes found: 9
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - 
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - ======================================================================
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - CONCLUSION
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - ======================================================================
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Started with 0 primes, found 9 primes through iteration.
+2026-01-11 12:31:09.177 [main] INFO  InfinitelyManyPrimes$ - Each iteration proves we can always find a new prime.
+2026-01-11 12:31:09.178 [main] INFO  InfinitelyManyPrimes$ - Therefore, there must be infinitely many primes!
+2026-01-11 12:31:09.178 [main] INFO  InfinitelyManyPrimes$ - 
+2026-01-11 12:31:09.178 [main] INFO  InfinitelyManyPrimes$ - All discovered primes: 2, 3, 5, 7, 13, 43, 53, 6221671, 38709183810571
+2026-01-11 12:31:09.179 [main] INFO  InfinitelyManyPrimes$ - 
+======================================================================
+2026-01-11 12:31:09.179 [main] INFO  InfinitelyManyPrimes$ - QED: There are infinitely many primes!
+2026-01-11 12:31:09.179 [main] INFO  InfinitelyManyPrimes$ - ======================================================================
+2026-01-11 12:39:02.749 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:39:02.750 [main] INFO  LongstaffSchwartzWorstOf$ - LONGSTAFF-SCHWARTZ FOR WORST-OF AMERICAN OPTION WITH DOWN-AND-IN BARRIER
+2026-01-11 12:39:02.750 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:39:02.750 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Option Structure:
+2026-01-11 12:39:02.750 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of assets: 3
+2026-01-11 12:39:02.750 [main] INFO  LongstaffSchwartzWorstOf$ -   - Strike: 100.0
+2026-01-11 12:39:02.751 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier (down-and-in): 70.0
+2026-01-11 12:39:02.752 [main] INFO  LongstaffSchwartzWorstOf$ -   - Call dates: 3, 6, 9, 12 months
+2026-01-11 12:39:02.752 [main] INFO  LongstaffSchwartzWorstOf$ -   - Maturity: 12 months
+2026-01-11 12:39:02.754 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Market Parameters:
+2026-01-11 12:39:02.754 [main] INFO  LongstaffSchwartzWorstOf$ -   - Initial prices: 100.0, 100.0, 100.0
+2026-01-11 12:39:02.754 [main] INFO  LongstaffSchwartzWorstOf$ -   - Risk-free rate: 5.0%
+2026-01-11 12:39:02.757 [main] INFO  LongstaffSchwartzWorstOf$ -   - Volatilities: 20.0%, 25.0%, 30.0%
+2026-01-11 12:39:02.757 [main] INFO  LongstaffSchwartzWorstOf$ -   - Correlations: ρ₁₂=0.5, ρ₁₃=0.3, ρ₂₃=0.4
+2026-01-11 12:39:02.764 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Basis Functions:
+2026-01-11 12:39:02.764 [main] INFO  LongstaffSchwartzWorstOf$ -   - Type: Polynomial basis for worst-of with barrier interactions
+2026-01-11 12:39:02.764 [main] INFO  LongstaffSchwartzWorstOf$ -   - Dimension: 19
+2026-01-11 12:39:02.764 [main] INFO  LongstaffSchwartzWorstOf$ -   - Max degree: 3
+2026-01-11 12:39:02.764 [main] INFO  LongstaffSchwartzWorstOf$ -   - Includes barrier interactions: Yes
+2026-01-11 12:39:02.766 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Monte Carlo Simulation:
+2026-01-11 12:39:02.766 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of paths: 10000
+2026-01-11 12:39:02.766 [main] INFO  LongstaffSchwartzWorstOf$ -   - Time steps: 13
+2026-01-11 12:39:02.767 [main] INFO  PathGenerator - Generating 10000 paths for 3 assets
+2026-01-11 12:39:02.920 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier hit rate: 25.42% (2542 paths)
+2026-01-11 12:39:02.920 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 12:39:02.920 [main] INFO  LongstaffSchwartzWorstOf$ - PRICING
+2026-01-11 12:39:02.920 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:39:02.920 [main] INFO  LongstaffSchwartzPricer - Pricing with 10000 paths using Longstaff-Schwartz
+2026-01-11 12:39:02.920 [main] INFO  LongstaffSchwartzPricer - Call dates: 3, 6, 9, 12, Maturity: 12
+2026-01-11 12:39:03.806 [main] INFO  LongstaffSchwartzPricer - 
+Option value: 13.3855 ± 0.1168
+2026-01-11 12:39:03.806 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 12:39:03.806 [main] INFO  LongstaffSchwartzWorstOf$ - RESULTS
+2026-01-11 12:39:03.806 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:39:03.806 [main] INFO  LongstaffSchwartzWorstOf$ - Worst-of American Down-and-In Put Price: 13.3855
+2026-01-11 12:39:03.806 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:50:27.632 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:50:27.633 [main] INFO  LongstaffSchwartzWorstOf$ - LONGSTAFF-SCHWARTZ FOR WORST-OF AMERICAN OPTION WITH DOWN-AND-IN BARRIER
+2026-01-11 12:50:27.633 [main] INFO  LongstaffSchwartzWorstOf$ - Using orthogonal Laguerre polynomials (original LS approach)
+2026-01-11 12:50:27.633 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:50:27.633 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Option Structure:
+2026-01-11 12:50:27.633 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of assets: 3
+2026-01-11 12:50:27.634 [main] INFO  LongstaffSchwartzWorstOf$ -   - Strike: 100.0
+2026-01-11 12:50:27.634 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier (down-and-in): 70.0
+2026-01-11 12:50:27.635 [main] INFO  LongstaffSchwartzWorstOf$ -   - Call dates: 3, 6, 9, 12 months
+2026-01-11 12:50:27.635 [main] INFO  LongstaffSchwartzWorstOf$ -   - Maturity: 12 months
+2026-01-11 12:50:27.636 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Market Parameters:
+2026-01-11 12:50:27.637 [main] INFO  LongstaffSchwartzWorstOf$ -   - Initial prices: 100.0, 100.0, 100.0
+2026-01-11 12:50:27.637 [main] INFO  LongstaffSchwartzWorstOf$ -   - Risk-free rate: 5.0%
+2026-01-11 12:50:27.640 [main] INFO  LongstaffSchwartzWorstOf$ -   - Volatilities: 20.0%, 25.0%, 30.0%
+2026-01-11 12:50:27.640 [main] INFO  LongstaffSchwartzWorstOf$ -   - Correlations: ρ₁₂=0.5, ρ₁₃=0.3, ρ₂₃=0.4
+2026-01-11 12:50:27.646 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Basis Functions:
+2026-01-11 12:50:27.646 [main] INFO  LongstaffSchwartzWorstOf$ -   - Type: Laguerre (orthogonal polynomials - original Longstaff-Schwartz)
+2026-01-11 12:50:27.646 [main] INFO  LongstaffSchwartzWorstOf$ -   - Dimension: 22
+2026-01-11 12:50:27.646 [main] INFO  LongstaffSchwartzWorstOf$ -   - Max degree: 5
+2026-01-11 12:50:27.646 [main] INFO  LongstaffSchwartzWorstOf$ -   - Includes barrier interactions: Yes
+2026-01-11 12:50:27.647 [main] INFO  LongstaffSchwartzWorstOf$ -   - Normalized to strike: Yes
+2026-01-11 12:50:27.647 [main] INFO  LongstaffSchwartzWorstOf$ -   - Advantages: No multicollinearity, superior numerical stability
+2026-01-11 12:50:27.649 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Monte Carlo Simulation:
+2026-01-11 12:50:27.649 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of paths: 10000
+2026-01-11 12:50:27.649 [main] INFO  LongstaffSchwartzWorstOf$ -   - Time steps: 13
+2026-01-11 12:50:27.649 [main] INFO  PathGenerator - Generating 10000 paths for 3 assets
+2026-01-11 12:50:27.740 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier hit rate: 25.42% (2542 paths)
+2026-01-11 12:50:27.740 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 12:50:27.740 [main] INFO  LongstaffSchwartzWorstOf$ - PRICING
+2026-01-11 12:50:27.740 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:50:27.741 [main] INFO  LongstaffSchwartzPricer - Pricing with 10000 paths using Longstaff-Schwartz
+2026-01-11 12:50:27.741 [main] INFO  LongstaffSchwartzPricer - Call dates: 3, 6, 9, 12, Maturity: 12
+2026-01-11 12:50:28.084 [main] INFO  LongstaffSchwartzPricer - 
+Option value: 13.4108 ± 0.1166
+2026-01-11 12:50:28.084 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 12:50:28.084 [main] INFO  LongstaffSchwartzWorstOf$ - RESULTS
+2026-01-11 12:50:28.084 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:50:28.084 [main] INFO  LongstaffSchwartzWorstOf$ - Worst-of American Down-and-In Put Price: 13.4108
+2026-01-11 12:50:28.084 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:58:32.574 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:58:32.575 [main] INFO  LongstaffSchwartzWorstOf$ - LONGSTAFF-SCHWARTZ FOR WORST-OF AMERICAN OPTION WITH DOWN-AND-IN BARRIER
+2026-01-11 12:58:32.575 [main] INFO  LongstaffSchwartzWorstOf$ - Using orthogonal Laguerre polynomials (original LS approach)
+2026-01-11 12:58:32.575 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:58:32.575 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Option Structure:
+2026-01-11 12:58:32.575 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of assets: 3
+2026-01-11 12:58:32.576 [main] INFO  LongstaffSchwartzWorstOf$ -   - Strike: 100.0
+2026-01-11 12:58:32.576 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier (down-and-in): 70.0
+2026-01-11 12:58:32.577 [main] INFO  LongstaffSchwartzWorstOf$ -   - Call dates: 3, 6, 9, 12 months
+2026-01-11 12:58:32.577 [main] INFO  LongstaffSchwartzWorstOf$ -   - Maturity: 12 months
+2026-01-11 12:58:32.578 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Market Parameters:
+2026-01-11 12:58:32.579 [main] INFO  LongstaffSchwartzWorstOf$ -   - Initial prices: 100.0, 100.0, 100.0
+2026-01-11 12:58:32.579 [main] INFO  LongstaffSchwartzWorstOf$ -   - Risk-free rate: 5.0%
+2026-01-11 12:58:32.581 [main] INFO  LongstaffSchwartzWorstOf$ -   - Volatilities: 20.0%, 25.0%, 30.0%
+2026-01-11 12:58:32.581 [main] INFO  LongstaffSchwartzWorstOf$ -   - Correlations: ρ₁₂=0.5, ρ₁₃=0.3, ρ₂₃=0.4
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Basis Functions:
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ -   - Type: Laguerre (orthogonal polynomials - original Longstaff-Schwartz)
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ -   - Dimension: 22
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ -   - Max degree: 5
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ -   - Includes barrier interactions: Yes
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ -   - Normalized to strike: Yes
+2026-01-11 12:58:32.587 [main] INFO  LongstaffSchwartzWorstOf$ -   - Advantages: No multicollinearity, superior numerical stability
+2026-01-11 12:58:32.589 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Monte Carlo Simulation:
+2026-01-11 12:58:32.589 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of paths: 10000
+2026-01-11 12:58:32.589 [main] INFO  LongstaffSchwartzWorstOf$ -   - Time steps: 13
+2026-01-11 12:58:32.589 [main] INFO  PathGenerator - Generating 10000 paths for 3 assets
+2026-01-11 12:58:32.681 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier hit rate: 25.42% (2542 paths)
+2026-01-11 12:58:32.681 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 12:58:32.681 [main] INFO  LongstaffSchwartzWorstOf$ - PRICING
+2026-01-11 12:58:32.681 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:58:32.681 [main] INFO  LongstaffSchwartzPricer - Pricing with 10000 paths using Longstaff-Schwartz
+2026-01-11 12:58:32.681 [main] INFO  LongstaffSchwartzPricer - Call dates: 3, 6, 9, 12, Maturity: 12
+2026-01-11 12:58:33.107 [main] INFO  LongstaffSchwartzPricer - 
+Option value: 13.4108 ± 0.1166
+2026-01-11 12:58:33.107 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 12:58:33.107 [main] INFO  LongstaffSchwartzWorstOf$ - RESULTS
+2026-01-11 12:58:33.107 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:58:33.107 [main] INFO  LongstaffSchwartzWorstOf$ - Worst-of American Down-and-In Put Price: 13.4108
+2026-01-11 12:58:33.107 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 12:59:39.089 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 12:59:39.090 [main] INFO  BasisFunctionComparison$ - BASIS FUNCTION COMPARISON FOR LONGSTAFF-SCHWARTZ
+2026-01-11 12:59:39.090 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 12:59:39.090 [main] INFO  BasisFunctionComparison$ - 
+Test scenario:
+2026-01-11 12:59:39.092 [main] INFO  BasisFunctionComparison$ -   Asset prices: 95.0, 88.0, 102.0
+2026-01-11 12:59:39.094 [main] INFO  BasisFunctionComparison$ -   Worst: 88.0
+2026-01-11 12:59:39.094 [main] INFO  BasisFunctionComparison$ -   Barrier breached: true
+2026-01-11 12:59:39.094 [main] INFO  BasisFunctionComparison$ -   Strike: 100.0
+2026-01-11 12:59:39.094 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 12:59:39.094 [main] INFO  BasisFunctionComparison$ - 1. STANDARD POLYNOMIAL BASIS
+2026-01-11 12:59:39.094 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 12:59:39.099 [main] INFO  BasisFunctionComparison$ - Dimension: 19
+2026-01-11 12:59:39.103 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 1.0000, 88.0000, 7744.0000, 681472.0000, 95.0000, 88.0000, 102.0000, 9025.0000, 7744.0000, 10404.0000
+2026-01-11 12:59:39.103 [main] INFO  BasisFunctionComparison$ - Value range: [1.0, 681472.0]
+2026-01-11 12:59:39.104 [main] INFO  BasisFunctionComparison$ - Condition number proxy (max/min ratio): 681472.0
+2026-01-11 12:59:39.104 [main] INFO  BasisFunctionComparison$ - 
+Pros: Simple, intuitive
+2026-01-11 12:59:39.104 [main] INFO  BasisFunctionComparison$ - Cons: Potential multicollinearity, numerical instability for high degrees
+2026-01-11 12:59:39.104 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 12:59:39.104 [main] INFO  BasisFunctionComparison$ - 2. LAGUERRE POLYNOMIAL BASIS (Original Longstaff-Schwartz)
+2026-01-11 12:59:39.104 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 12:59:39.106 [main] INFO  BasisFunctionComparison$ - Dimension: 22
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 0.6440, 0.0773, -0.2401, -0.3813, -0.4032, -0.3499, 0.6219, 0.0311, -0.2791, 0.6440
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - Value range: [-0.4032488240766357, 1.0]
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - 
+Pros: Orthogonal (no multicollinearity), numerically stable, proven in practice
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - Cons: Slightly more complex, requires normalization
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - Best for: Positive-valued variables (asset prices), general purpose
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - 3. HERMITE POLYNOMIAL BASIS
+2026-01-11 12:59:39.107 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - Dimension: 22
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 0.9959, -0.1273, -0.9796, 0.3799, 2.8904, -1.8889, 0.9993, -0.0513, -0.9967, 0.9959
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - Value range: [-1.888912345207928, 2.8903864427752337]
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - 
+Pros: Orthogonal, natural for normal distributions (log-returns)
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - Cons: Works on log-returns, less intuitive
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - Best for: When underlying returns are approximately normal
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - 4. CHEBYSHEV POLYNOMIAL BASIS
+2026-01-11 12:59:39.109 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 12:59:39.111 [main] INFO  BasisFunctionComparison$ - Dimension: 22
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 0.9708, -0.2330, -0.8589, 0.6453, 0.5492, -0.9089, 0.9950, -0.0995, -0.9751, 0.9708
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - Value range: [-0.9960022407685637, 1.0]
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - 
+Pros: Minimax approximation, extremely well-conditioned, natural for bounded domains
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - Cons: Requires choosing bounds, less natural for unbounded price processes
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - Best for: Options with known price ranges, barrier options with well-defined bounds
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - 
+================================================================================
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - NUMERICAL STABILITY COMPARISON
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 12:59:39.112 [main] INFO  BasisFunctionComparison$ - 
+Condition number proxy (lower is better):
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ -   Standard Polynomial: 6.81e+05
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ -   Laguerre:           2.48e+00
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ -   Hermite:            1.53e+00
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ -   Chebyshev:          1.00e+00
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - 
+================================================================================
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - RECOMMENDATIONS
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - 
+|Basis Function   | Best For                           | Numerical Stability | Complexity | Domain      |
+|-----------------|------------------------------------|---------------------|------------|-------------|
+|Standard Poly    | Quick prototyping, low degree      | Poor (high degree)  | Simple     | Unbounded   |
+|Laguerre         | General purpose, asset prices      | Excellent           | Medium     | [0, ∞)      |
+|Hermite          | Log-normal models, log-returns     | Excellent           | Medium     | (-∞, ∞)     |
+|Chebyshev        | Bounded domains, barrier options   | Excellent           | Medium     | [-1, 1]     |
+
+RECOMMENDATION FOR YOUR CASE (Worst-of American with Barrier):
+
+✓ LAGUERRE POLYNOMIALS - Primary recommendation:
+  1. Original Longstaff-Schwartz paper used them (proven track record)
+  2. Excellent numerical stability (important for multiple regression)
+  3. Natural for positive asset prices (domain [0, ∞))
+  4. Orthogonality eliminates multicollinearity issues
+  5. Better convergence with higher degrees (5-7)
+  6. No need to specify bounds
+
+✓ CHEBYSHEV POLYNOMIALS - Strong alternative for barrier options:
+  1. Optimal approximation properties (minimax theorem)
+  2. Natural bounded domain matches barrier structure
+  3. Extremely well-conditioned (condition number close to 1)
+  4. Excellent when you know price will stay in a range
+  5. Requires choosing upper/lower bounds carefully
+
+Other alternatives:
+- Hermite: If working in log-return space
+- Standard polynomials: ONLY for low degrees (≤3) and prototyping
+
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - 
+================================================================================
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - USAGE EXAMPLE
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - 
+OPTION 1: Laguerre basis (general purpose, proven):
+
+val basisFunctions = new LaguerreBasisFunctions(
+  numAssets = 3,
+  maxDegree = 5,              // Can use higher degrees safely
+  includeBarrierInteractions = true,
+  normalizeToStrike = true,
+  strikeLevel = 100.0
+)
+
+OPTION 2: Chebyshev basis (excellent for barrier options):
+
+val basisFunctions = new ChebyshevBasisFunctions(
+  numAssets = 3,
+  maxDegree = 5,
+  includeBarrierInteractions = true,
+  lowerBound = 50.0,          // Below barrier (e.g., barrier * 0.7)
+  upperBound = 150.0          // Above initial (e.g., initial * 1.5)
+)
+
+Then price as usual:
+val pricer = new LongstaffSchwartzPricer(option, basisFunctions, payoffCalculator)
+val price = pricer.price(paths)
+
+Both Laguerre and Chebyshev support higher degrees (5-7) safely!
+
+2026-01-11 12:59:39.113 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:16.166 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:16.167 [main] INFO  BasisFunctionComparison$ - BASIS FUNCTION COMPARISON FOR LONGSTAFF-SCHWARTZ
+2026-01-11 13:07:16.167 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:16.167 [main] INFO  BasisFunctionComparison$ - 
+Test scenario:
+2026-01-11 13:07:16.170 [main] INFO  BasisFunctionComparison$ -   Asset prices: 95.0, 88.0, 102.0
+2026-01-11 13:07:16.170 [main] INFO  BasisFunctionComparison$ -   Worst: 88.0
+2026-01-11 13:07:16.171 [main] INFO  BasisFunctionComparison$ -   Barrier breached: true
+2026-01-11 13:07:16.171 [main] INFO  BasisFunctionComparison$ -   Strike: 100.0
+2026-01-11 13:07:16.171 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 13:07:16.171 [main] INFO  BasisFunctionComparison$ - 1. STANDARD POLYNOMIAL BASIS
+2026-01-11 13:07:16.171 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 13:07:16.176 [main] INFO  BasisFunctionComparison$ - Dimension: 19
+2026-01-11 13:07:16.179 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 1.0000, 88.0000, 7744.0000, 681472.0000, 95.0000, 88.0000, 102.0000, 9025.0000, 7744.0000, 10404.0000
+2026-01-11 13:07:16.179 [main] INFO  BasisFunctionComparison$ - Value range: [1.0, 681472.0]
+2026-01-11 13:07:16.180 [main] INFO  BasisFunctionComparison$ - Condition number proxy (max/min ratio): 681472.0
+2026-01-11 13:07:16.180 [main] INFO  BasisFunctionComparison$ - 
+Pros: Simple, intuitive
+2026-01-11 13:07:16.180 [main] INFO  BasisFunctionComparison$ - Cons: Potential multicollinearity, numerical instability for high degrees
+2026-01-11 13:07:16.180 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 13:07:16.180 [main] INFO  BasisFunctionComparison$ - 2. LAGUERRE POLYNOMIAL BASIS (Original Longstaff-Schwartz)
+2026-01-11 13:07:16.180 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - Dimension: 22
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 0.6440, 0.0773, -0.2401, -0.3813, -0.4032, -0.3499, 0.6219, 0.0311, -0.2791, 0.6440
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - Value range: [-0.4032488240766357, 1.0]
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - 
+Pros: Orthogonal (no multicollinearity), numerically stable, proven in practice
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - Cons: Slightly more complex, requires normalization
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - Best for: Positive-valued variables (asset prices), general purpose
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - 3. HERMITE POLYNOMIAL BASIS
+2026-01-11 13:07:16.183 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - Dimension: 22
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 0.9959, -0.1273, -0.9796, 0.3799, 2.8904, -1.8889, 0.9993, -0.0513, -0.9967, 0.9959
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - Value range: [-1.888912345207928, 2.8903864427752337]
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - 
+Pros: Orthogonal, natural for normal distributions (log-returns)
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - Cons: Works on log-returns, less intuitive
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - Best for: When underlying returns are approximately normal
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - 
+--------------------------------------------------------------------------------
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - 4. CHEBYSHEV POLYNOMIAL BASIS
+2026-01-11 13:07:16.185 [main] INFO  BasisFunctionComparison$ - --------------------------------------------------------------------------------
+2026-01-11 13:07:16.186 [main] INFO  BasisFunctionComparison$ - Dimension: 22
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - Basis values (first 10): 0.9708, -0.2330, -0.8589, 0.6453, 0.5492, -0.9089, 0.9950, -0.0995, -0.9751, 0.9708
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - Value range: [-0.9960022407685637, 1.0]
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - 
+Pros: Minimax approximation, extremely well-conditioned, natural for bounded domains
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - Cons: Requires choosing bounds, less natural for unbounded price processes
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - Best for: Options with known price ranges, barrier options with well-defined bounds
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - 
+================================================================================
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - NUMERICAL STABILITY COMPARISON
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ - 
+Condition number proxy (lower is better):
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ -   Standard Polynomial: 6.81e+05
+2026-01-11 13:07:16.187 [main] INFO  BasisFunctionComparison$ -   Laguerre:           2.48e+00
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ -   Hermite:            1.53e+00
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ -   Chebyshev:          1.00e+00
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - 
+================================================================================
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - RECOMMENDATIONS
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - 
+|Basis Function   | Best For                           | Numerical Stability | Complexity | Domain      |
+|-----------------|------------------------------------|---------------------|------------|-------------|
+|Standard Poly    | Quick prototyping, low degree      | Poor (high degree)  | Simple     | Unbounded   |
+|Laguerre         | General purpose, asset prices      | Excellent           | Medium     | [0, ∞)      |
+|Hermite          | Log-normal models, log-returns     | Excellent           | Medium     | (-∞, ∞)     |
+|Chebyshev        | Bounded domains, barrier options   | Excellent           | Medium     | [-1, 1]     |
+
+RECOMMENDATION FOR YOUR CASE (Worst-of American with Barrier):
+
+✓ LAGUERRE POLYNOMIALS - Primary recommendation:
+  1. Original Longstaff-Schwartz paper used them (proven track record)
+  2. Excellent numerical stability (important for multiple regression)
+  3. Natural for positive asset prices (domain [0, ∞))
+  4. Orthogonality eliminates multicollinearity issues
+  5. Better convergence with higher degrees (5-7)
+  6. No need to specify bounds
+
+✓ CHEBYSHEV POLYNOMIALS - Strong alternative for barrier options:
+  1. Optimal approximation properties (minimax theorem)
+  2. Natural bounded domain matches barrier structure
+  3. Extremely well-conditioned (condition number close to 1)
+  4. Excellent when you know price will stay in a range
+  5. Requires choosing upper/lower bounds carefully
+
+Other alternatives:
+- Hermite: If working in log-return space
+- Standard polynomials: ONLY for low degrees (≤3) and prototyping
+
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - 
+================================================================================
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - USAGE EXAMPLE
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - 
+OPTION 1: Laguerre basis (general purpose, proven):
+
+val basisFunctions = new LaguerreBasisFunctions(
+  numAssets = 3,
+  maxDegree = 5,              // Can use higher degrees safely
+  includeBarrierInteractions = true,
+  normalizeToStrike = true,
+  strikeLevel = 100.0
+)
+
+OPTION 2: Chebyshev basis (excellent for barrier options):
+
+val basisFunctions = new ChebyshevBasisFunctions(
+  numAssets = 3,
+  maxDegree = 5,
+  includeBarrierInteractions = true,
+  lowerBound = 50.0,          // Below barrier (e.g., barrier * 0.7)
+  upperBound = 150.0          // Above initial (e.g., initial * 1.5)
+)
+
+Then price as usual:
+val pricer = new LongstaffSchwartzPricer(option, basisFunctions, payoffCalculator)
+val price = pricer.price(paths)
+
+Both Laguerre and Chebyshev support higher degrees (5-7) safely!
+
+2026-01-11 13:07:16.188 [main] INFO  BasisFunctionComparison$ - ================================================================================
+2026-01-11 13:07:27.505 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 13:07:27.506 [main] INFO  LongstaffSchwartzWorstOf$ - LONGSTAFF-SCHWARTZ FOR WORST-OF AMERICAN OPTION WITH DOWN-AND-IN BARRIER
+2026-01-11 13:07:27.506 [main] INFO  LongstaffSchwartzWorstOf$ - Using orthogonal Laguerre polynomials (original LS approach)
+2026-01-11 13:07:27.506 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 13:07:27.506 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Payoff Type: PERFORMANCE-BASED (S/S_0)
+2026-01-11 13:07:27.507 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Option Structure:
+2026-01-11 13:07:27.507 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of assets: 3
+2026-01-11 13:07:27.508 [main] INFO  LongstaffSchwartzWorstOf$ -   - Strike: 1.0 (100%)
+2026-01-11 13:07:27.508 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier (down-and-in): 0.7 (70%)
+2026-01-11 13:07:27.509 [main] INFO  LongstaffSchwartzWorstOf$ -   - Call dates: 3, 6, 9, 12 months
+2026-01-11 13:07:27.509 [main] INFO  LongstaffSchwartzWorstOf$ -   - Maturity: 12 months
+2026-01-11 13:07:27.509 [main] INFO  LongstaffSchwartzWorstOf$ -   - Payoff: max(Strike - Worst_Performance, 0) = max(1.0 - min(S_i/S_i(0)), 0)
+2026-01-11 13:07:27.510 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Market Parameters:
+2026-01-11 13:07:27.511 [main] INFO  LongstaffSchwartzWorstOf$ -   - Initial prices: 100.0, 100.0, 100.0
+2026-01-11 13:07:27.511 [main] INFO  LongstaffSchwartzWorstOf$ -   - Risk-free rate: 5.0%
+2026-01-11 13:07:27.514 [main] INFO  LongstaffSchwartzWorstOf$ -   - Volatilities: 20.0%, 25.0%, 30.0%
+2026-01-11 13:07:27.514 [main] INFO  LongstaffSchwartzWorstOf$ -   - Correlations: ρ₁₂=0.5, ρ₁₃=0.3, ρ₂₃=0.4
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Basis Functions:
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ -   - Type: Laguerre (orthogonal polynomials - original Longstaff-Schwartz)
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ -   - Dimension: 22
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ -   - Max degree: 5
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ -   - Includes barrier interactions: Yes
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ -   - Uses performances (S/S_0) - naturally normalized around 1.0
+2026-01-11 13:07:27.520 [main] INFO  LongstaffSchwartzWorstOf$ -   - Advantages: No multicollinearity, superior numerical stability
+2026-01-11 13:07:27.523 [main] INFO  LongstaffSchwartzWorstOf$ - 
+Monte Carlo Simulation:
+2026-01-11 13:07:27.523 [main] INFO  LongstaffSchwartzWorstOf$ -   - Number of paths: 10000
+2026-01-11 13:07:27.523 [main] INFO  LongstaffSchwartzWorstOf$ -   - Time steps: 13
+2026-01-11 13:07:27.523 [main] INFO  PathGenerator - Generating 10000 paths for 3 assets
+2026-01-11 13:07:27.647 [main] INFO  LongstaffSchwartzWorstOf$ -   - Barrier hit rate: 25.42% (2542 paths)
+2026-01-11 13:07:27.647 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 13:07:27.647 [main] INFO  LongstaffSchwartzWorstOf$ - PRICING
+2026-01-11 13:07:27.647 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 13:07:27.647 [main] INFO  LongstaffSchwartzPricer - Pricing with 10000 paths using Longstaff-Schwartz
+2026-01-11 13:07:27.647 [main] INFO  LongstaffSchwartzPricer - Call dates: 3, 6, 9, 12, Maturity: 12
+2026-01-11 13:07:28.023 [main] INFO  LongstaffSchwartzPricer - 
+Option value: 0.1341 ± 0.0012
+2026-01-11 13:07:28.023 [main] INFO  LongstaffSchwartzWorstOf$ - 
+================================================================================
+2026-01-11 13:07:28.023 [main] INFO  LongstaffSchwartzWorstOf$ - RESULTS
+2026-01-11 13:07:28.023 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 13:07:28.023 [main] INFO  LongstaffSchwartzWorstOf$ - Worst-of American Down-and-In Put Price: 0.1341
+2026-01-11 13:07:28.024 [main] INFO  LongstaffSchwartzWorstOf$ -   (Performance-based: payoff on S/S_0)
+2026-01-11 13:07:28.024 [main] INFO  LongstaffSchwartzWorstOf$ -   Strike: 100.0%, Barrier: 70.0%
+2026-01-11 13:07:28.024 [main] INFO  LongstaffSchwartzWorstOf$ - ================================================================================
+2026-01-11 13:07:28.024 [main] INFO  LongstaffSchwartzWorstOf$ - 
+
+KEY IMPLEMENTATION NOTES:
+
+1. PERFORMANCE vs ABSOLUTE PRICE:
+   - Set usePerformance = true  for S/S_0 payoffs (MOST COMMON in structured products)
+   - Set usePerformance = false for absolute price payoffs
+   - Everything adjusts automatically: barrier monitoring, payoffs, basis functions
+
+2. PERFORMANCE-BASED ADVANTAGES:
+   - Natural normalization (performances ~1.0, no need to normalize by strike)
+   - Barrier/strike in percentage terms (e.g., 0.70 = 70%, 1.0 = 100%)
+   - Standard in equity-linked notes and worst-of structures
+
+3. BASIS FUNCTION COMPARISON:
+   To use standard polynomials instead of Laguerre (not recommended):
+
+   val basisFunctions = new WorstOfPolynomialBasis(
+     numAssets = numAssets,
+     maxDegree = 3,  // Max 3 for stability with standard polynomials
+     includeBarrierInteractions = true
+   )
+
+   Laguerre gives more stable and reliable results with higher degrees (5-7).
+
